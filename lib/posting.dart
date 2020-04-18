@@ -19,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController usernameController = new TextEditingController();
   final TextEditingController passwordController = new TextEditingController();
   final TextEditingController phoneController = new TextEditingController();
+  final TextEditingController firstnameController = new TextEditingController();
+  final TextEditingController lastnameController = new TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +47,7 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  signIn(String username, password, phone) async {
+  signIn(String username, password, phone, lastname, firstname) async {
     String url = 'http://157.245.163.170:8000/api/v1/users/';
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -53,7 +55,9 @@ class _LoginPageState extends State<LoginPage> {
     Map data = {
       'username': username,
       'password': password,
-      'phonenumber': phone
+      'phonenumber': phone,
+      'first_name': firstname,
+      'last_name': lastname,
     };
 
     var jsonResponse = null;
@@ -66,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
         setState(() {
           _isLoading = false;
           sharedPreferences.setString("token", jsonResponse['token']);
+         // sharedPreferences.setString('id', jsonResponse['id']);
           Navigator.of(context).pushAndRemoveUntil(
               MaterialPageRoute(builder: (BuildContext context) => MainPage()),
               (Route<dynamic> route) => false);
@@ -74,7 +79,9 @@ class _LoginPageState extends State<LoginPage> {
     } else {
       setState(() {
         _isLoading = false;
-        print(response.body);
+        Text(response.body);
+        print('Print' + response.body);
+       // print('ID == '+ jsonResponse['id']);
       });
     }
   }
@@ -92,8 +99,12 @@ class _LoginPageState extends State<LoginPage> {
                 : () {
                     setState(() {
                       _isLoading = true;
-                      signIn(usernameController.text, passwordController.text,
-                          phoneController.text);
+                      signIn(
+                          usernameController.text,
+                          passwordController.text,
+                          phoneController.text,
+                          firstnameController.text,
+                          lastnameController.text);
                     });
                   },
         elevation: 0.0,
@@ -144,6 +155,34 @@ class _LoginPageState extends State<LoginPage> {
             decoration: InputDecoration(
               icon: Icon(Icons.lock, color: Colors.white70),
               hintText: "Phone",
+              border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white70)),
+              hintStyle: TextStyle(color: Colors.white70),
+            ),
+          ),
+          SizedBox(height: 30.0),
+          TextFormField(
+            controller: firstnameController,
+            cursorColor: Colors.white,
+            obscureText: false,
+            style: TextStyle(color: Colors.white70),
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock, color: Colors.white70),
+              hintText: "First Name",
+              border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white70)),
+              hintStyle: TextStyle(color: Colors.white70),
+            ),
+          ),
+          SizedBox(height: 30.0),
+          TextFormField(
+            controller: lastnameController,
+            cursorColor: Colors.white,
+            obscureText: false,
+            style: TextStyle(color: Colors.white70),
+            decoration: InputDecoration(
+              icon: Icon(Icons.lock, color: Colors.white70),
+              hintText: "Last Name",
               border: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.white70)),
               hintStyle: TextStyle(color: Colors.white70),

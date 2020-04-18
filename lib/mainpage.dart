@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
         ],
       ),
       body: Center(
-        child: Text('Miin Page'),
+        child: Text('Main Page'),
       ),
     );
   }
