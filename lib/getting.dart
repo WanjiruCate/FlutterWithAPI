@@ -10,7 +10,7 @@ class GetEvent extends StatefulWidget {
 
 class _GetEventState extends State<GetEvent> {
   List data;
-  String myUrl = 'http://157.245.163.170:8000/api/v1/events/';
+  String myUrl = '#';
 
   Future<String> getData() async {
     http.Response response = await http.get(
