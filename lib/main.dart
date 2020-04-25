@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:trial_http/getting.dart';
 import 'package:trial_http/posting.dart';
+import 'package:trial_http/services/notes_service.dart';
 import 'package:trial_http/views/notelist.dart';
 
-void main() => runApp(MyApp());
+void setupLocator() {
+  GetIt.instance.registerLazySingleton(() => NotesService());
+  // GetIt.instance<NotesService>();
+}
+
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   final String title = '';
