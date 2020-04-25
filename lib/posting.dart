@@ -48,7 +48,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   signIn(String username, password, phone, lastname, firstname) async {
-    String url = 'http://157.245.163.170:8000/api/v1/users/';
+    String url = '#';
 
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
 
