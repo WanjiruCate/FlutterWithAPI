@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trial_http/models/notes_for_listing.dart';
+import 'package:trial_http/views/note_delete.dart';
+import 'package:trial_http/views/note_modify.dart';
 
 class NoteList extends StatefulWidget {
   @override
@@ -9,6 +11,10 @@ class NoteList extends StatefulWidget {
 class _NoteListState extends State<NoteList> {
   List<NoteForListing> _notes = NoteForListing.getNotes;
 
+  String formatDateTime(DateTime dateTime) {
+    return '${dateTime.day}/${dateTime.month}/${dateTime.year}';
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +22,10 @@ class _NoteListState extends State<NoteList> {
         title: Text('List of Notes'),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => NoteModify()));
+        },
         child: Icon(Icons.add),
       ),
       body: ListView.separated(
@@ -25,14 +34,42 @@ class _NoteListState extends State<NoteList> {
           color: Colors.green,
         ),
         itemBuilder: (_, index) {
-          return ListTile(
-            title: Text(
-              //  'hello',
-              _notes[index].noteid,
-              style: TextStyle(color: Theme.of(context).primaryColor),
+          return Dismissible(
+            key: ValueKey(_notes[index].noteid),
+            direction: DismissDirection.startToEnd,
+            onDismissed: (direction) {},
+            confirmDismiss: (direction) async {
+              final result = await showDialog(
+                  context: context, builder: (_) => NoteDelete());
+              print(result);
+              return result;
+            },
+            background: Container(
+              color: Colors.red,
+              padding: EdgeInsets.only(left: 16),
+              child: Align(
+                child: Icon(Icons.delete, color: Colors.white),
+                alignment: Alignment.centerLeft,
+              ),
             ),
-            subtitle: Text(_notes[index].noteTitle),
-            // Text('Note 1')
+            child: ListTile(
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            NoteModify(noteID: _notes[index].noteid)));
+              },
+              title: Text(
+                //  'hello',
+                _notes[index].noteTitle,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              subtitle: Text(
+                  'Last Edited on ${formatDateTime(_notes[index].editedTime)}'),
+              //Text(_notes[index].noteTitle),
+              // Text('Note 1')
+            ),
           );
         },
         itemCount: _notes.length,
