@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trial_http/getting.dart';
 import 'package:trial_http/posting.dart';
+import 'package:trial_http/views/notelist.dart';
 
 void main() => runApp(MyApp());
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: NoteList(),
       // routes: <String, WidgetBuilder>{
       //   '/dashboard': (BuildContext context) => new Dashboard(title: title),
       //   '/adddata': (BuildContext context) => new AddData(title: title),
