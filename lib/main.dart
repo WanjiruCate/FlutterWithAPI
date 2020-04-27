@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:trial_http/getting.dart';
+import 'package:trial_http/models/category_for_listing.dart';
 import 'package:trial_http/posting.dart';
+import 'package:trial_http/services/category_service.dart';
 import 'package:trial_http/services/notes_service.dart';
+import 'package:trial_http/views/category_view.dart';
 import 'package:trial_http/views/notelist.dart';
 
-void setupLocator() {
-  GetIt.instance.registerLazySingleton(() => NotesService());
-  // GetIt.instance<NotesService>();
-}
-
 void main() {
-  setupLocator();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  Category category;
   final String title = '';
   @override
   Widget build(BuildContext context) {
@@ -26,7 +24,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: NoteList(),
+
+      home: CategorList(),
       // routes: <String, WidgetBuilder>{
       //   '/dashboard': (BuildContext context) => new Dashboard(title: title),
       //   '/adddata': (BuildContext context) => new AddData(title: title),
