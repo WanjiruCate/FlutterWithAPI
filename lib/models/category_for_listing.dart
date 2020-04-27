@@ -1,7 +1,7 @@
 class Category {
-  String categoryId;
+  int categoryId;
   String categoryName;
-  DateTime createdAt;
+  String createdAt;
 
   Category({
     this.categoryId,
@@ -11,9 +11,9 @@ class Category {
 
   factory Category.getfromJson(Map<String, dynamic> json) {
     return new Category(
-      categoryId: json['CategoryId'],
+      categoryId: json['id'],
       categoryName: json['categoryName'],
-     // createdAt: json['created_at'],
+      createdAt: json['created_at'],
     );
   }
 }

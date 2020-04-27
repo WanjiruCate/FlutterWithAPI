@@ -42,7 +42,9 @@ class _CategorListState extends State<CategorList> {
         title: Text('Category List'),
       ),
       body: isLoading
-          ? CircularProgressIndicator()
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
           : ListView.separated(
               itemCount: listcategories.length,
               separatorBuilder: (_, __) => Divider(
@@ -71,17 +73,14 @@ class _CategorListState extends State<CategorList> {
                   ),
                   child: ListTile(
                     onTap: () {
-                     //TODO Implement onTap
+                      //TODO Implement onTap
                     },
                     title: Text(
                       //  'hello',
                       category.categoryName,
                       style: TextStyle(color: Theme.of(context).primaryColor),
                     ),
-                    // subtitle: Text(
-                    //     'Last Edited on ${formatDateTime(category.createdAt ?? category.createdAt)}'),
-                    //Text(_notes[index].noteTitle),
-                    // Text('Note 1')
+                    subtitle: Text('Last Edited on ${(category.createdAt)}'),
                   ),
                 );
               },
