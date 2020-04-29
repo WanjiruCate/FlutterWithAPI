@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trial_http/models/category_for_listing.dart';
-import 'package:trial_http/models/company.dart';
-import 'package:trial_http/services/category_service.dart';
+import 'package:trial_http/services/dio_trial.dart';
 
 class CategoryViewDropTwo extends StatefulWidget {
   @override
