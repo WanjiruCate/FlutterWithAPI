@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trial_http/models/category_for_listing.dart';
-import 'package:trial_http/services/category_service.dart';
+import 'package:trial_http/services/category_service_get.dart';
 
 class CategoryDropDownView extends StatefulWidget {
   @override
@@ -47,8 +47,6 @@ class DropDownCategory extends StatefulWidget {
 
 class _DropDownCategoryState extends State<DropDownCategory> {
   List<Category> getListCategories;
-
-  String dropDownvalue = 'Two';
 
   bool isLoading = false;
 
